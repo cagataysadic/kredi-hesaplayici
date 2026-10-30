@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kredi Hesaplama Aracı</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <h1 class="page-header__title">Kredi Hesaplama Aracı</h1>
+    </header>
+
+    <div class="card">
+      <form id="kredi-formu" class="loan-form">
+        <div class="field">
+          <label class="field__label" for="krediTuru">Kredi Tipi</label>
+          <div class="field__control field__control--select">
+            <select class="field__input field__input--select" id="krediTuru" name="krediTuru">
+              <option value="konut">Konut Kredisi</option>
+              <option value="ihtiyac">İhtiyaç Kredisi</option>
+              <option value="tasit">Taşıt Kredisi</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="anaPara">Kredi Tutarı</label>
+          <div class="field__control">
+            <input class="field__input field__input--with-suffix" id="anaPara" name="anaPara"
+                   type="text" inputmode="decimal" aria-describedby="anaPara-hata">
+            <span class="field__suffix">TL</span>
+          </div>
+          <p class="field__error" id="anaPara-hata" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="taksitSayisi">Kredi Vadesi (Ay)</label>
+          <div class="field__control field__control--select">
+            <select class="field__input field__input--select" id="taksitSayisi" name="taksitSayisi">
+              <option value="12">12</option>
+              <option value="24">24</option>
+              <option value="36">36</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="button button--primary" type="submit">Hesapla</button>
+      </form>
+
+      <div class="results" id="sonuclar" hidden>
+        <section class="summary" aria-labelledby="ozet-baslik">
+          <h2 class="summary__title" id="ozet-baslik">Hesaplama Detayları</h2>
+          <dl class="summary__list">
+            <div class="summary__row summary__row--highlight">
+              <dt class="summary__label">Aylık taksit</dt>
+              <dd class="summary__value" id="ozet-taksit"></dd>
+            </div>
+            <div class="summary__row">
+              <dt class="summary__label">Toplam faiz</dt>
+              <dd class="summary__value" id="ozet-faiz"></dd>
+            </div>
+            <div class="summary__row">
+              <dt class="summary__label">Toplam geri ödeme</dt>
+              <dd class="summary__value" id="ozet-toplam"></dd>
+            </div>
+            <div class="summary__row">
+              <dt class="summary__label">Aylık faiz oranı</dt>
+              <dd class="summary__value" id="ozet-oran"></dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="plan" aria-labelledby="plan-baslik">
+          <h2 class="plan__title" id="plan-baslik">Ödeme Planı</h2>
+          <div class="plan__scroll" role="region" aria-labelledby="plan-baslik" tabindex="0">
+            <table class="plan__table">
+              <thead>
+                <tr>
+                  <th scope="col">Ay</th>
+                  <th scope="col">Taksit</th>
+                  <th scope="col">Faiz</th>
+                  <th scope="col">Anapara</th>
+                  <th scope="col">Kalan</th>
+                </tr>
+              </thead>
+              <tbody id="odeme-plani"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
